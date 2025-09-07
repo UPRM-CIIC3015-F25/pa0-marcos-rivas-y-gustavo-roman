@@ -19,7 +19,7 @@ def ball_movement():
 
     # Start the ball movement when the game begins
     # TODO Task 5 Create a Merge Conflict
-    speed = 7
+    speed = 5
     if start:
         ball_speed_x = speed * random.choice((1, -1))  # Randomize initial horizontal direction
         ball_speed_y = speed * random.choice((1, -1))  # Randomize initial vertical direction
@@ -34,10 +34,6 @@ def ball_movement():
             ball_speed_y *= -1  # Reverse ball's vertical direction
             hit_sound.play()
             # TODO Task 6: Add sound effects HERE
-
-#pygame.init()
-#pygame.mixer.init()
-#hit_sound = pygame.mixer.Sound("hit_sound.wav")
 
 
     # Ball collision with top boundary
@@ -140,7 +136,13 @@ while True:
     # TODO Task 3: Change the Ball Color
     pygame.draw.ellipse(screen, chocolate1, ball)  # Draw ball
     player_text = basic_font.render(f'{score}', False, light_grey)  # Render player score
-    screen.blit(player_text, (screen_width/2 - 15, 10))  # Display score on screen
+    screen.blit(player_text, (screen_width/2 - 15, 45))  # Display score on screen
+
+# High Score test
+    high_score = 0
+    player_best = basic_font.render(f'{high_score}', False, light_grey)  # Render player high score
+    screen.blit(player_best, (screen_width/2 - 15, 10))  # Display high score on screen
+
 
     # Update display
     pygame.display.flip()
