@@ -1,11 +1,14 @@
 import pygame, sys, random
+from pygame.image import save_extended
 
+# Sound effects
 pygame.mixer.pre_init(44100, -16, 2, 512)
-
 pygame.init()
-
 hit_sound = pygame.mixer.Sound("hit_sound.wav")
 hit_sound.set_volume(0.5)
+
+# Defines high Score
+high_score = 0
 
 def ball_movement():
     """
@@ -63,9 +66,12 @@ def restart():
     """
     Resets the ball and player scores to the initial state.
     """
-    global ball_speed_x, ball_speed_y, score
+    global ball_speed_x, ball_speed_y, score, high_score
     ball.center = (screen_width / 2, screen_height / 2)  # Reset ball position to center
     ball_speed_y, ball_speed_x = 0, 0  # Stop ball movement
+    # Redefines high score
+    if high_score < score:
+        high_score = score
     score = 0  # Reset player score
 
 # General setup
@@ -135,7 +141,11 @@ while True:
     # TODO Task 3: Change the Ball Color
     pygame.draw.ellipse(screen, chocolate1, ball)  # Draw ball
     player_text = basic_font.render(f'{score}', False, light_grey)  # Render player score
-    screen.blit(player_text, (screen_width/2 - 15, 10))  # Display score on screen
+    screen.blit(player_text, (screen_width/2 - 15, 45))  # Display score on screen
+
+    # Displaying high score
+    player_best = basic_font.render(f'High Score: {high_score}', False, chocolate1)  # Render high score
+    screen.blit(player_best, (screen_width/2 - 115, 10))  # Display high score
 
     # Update display
     pygame.display.flip()
