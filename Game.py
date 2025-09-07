@@ -35,6 +35,10 @@ def ball_movement():
             hit_sound.play()
             # TODO Task 6: Add sound effects HERE
 
+#pygame.init()
+#pygame.mixer.init()
+#hit_sound = pygame.mixer.Sound("hit_sound.wav")
+
 
     # Ball collision with top boundary
     if ball.top <= 0:
