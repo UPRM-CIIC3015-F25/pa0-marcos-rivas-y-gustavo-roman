@@ -19,7 +19,7 @@ def ball_movement():
 
     # Start the ball movement when the game begins
     # TODO Task 5 Create a Merge Conflict
-    speed = 7
+    speed = 10
     if start:
         ball_speed_x = speed * random.choice((1, -1))  # Randomize initial horizontal direction
         ball_speed_y = speed * random.choice((1, -1))  # Randomize initial vertical direction
@@ -31,10 +31,9 @@ def ball_movement():
             # TODO Task 2: Fix score to increase by 1
             #Task 2: Completed
             score += 1  # Increase player score
-            ball_speed_y *= -1.1  # Reverse ball's vertical direction
+            ball_speed_y *= -1.05  # Reverse ball's vertical direction
             hit_sound.play()
             # TODO Task 6: Add sound effects HERE
-
 
     # Ball collision with top boundary
     if ball.top <= 0:
