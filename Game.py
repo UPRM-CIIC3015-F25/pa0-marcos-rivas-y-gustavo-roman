@@ -4,18 +4,18 @@ from pygame.image import save_extended
 # Sound effects
 pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
-hit_sound = pygame.mixer.Sound("hit_sound.wav")
-hit_sound.set_volume(0.5)
+hit_sound = pygame.mixer.Sound("hit_sound.wav") # Plays hit sound when ball touches the paddle
+hit_sound.set_volume(0.5) # Hit sound volume
 
 # Defines high Score
 high_score = 0
 
-pygame.mixer.music.load("pong_music.wav")
-pygame.mixer.music.set_volume(0.2)
-pygame.mixer.music.play(-1)
+pygame.mixer.music.load("pong_music.wav") # Plays background music
+pygame.mixer.music.set_volume(0.2) # Music volume
+pygame.mixer.music.play(-1) # Loops infinitely
 
-sound_on = pygame.image.load("sound_on.png")
-sound_off = pygame.image.load("sound_off.png")
+sound_on = pygame.image.load("sound_on.png") # Sound Unmuted icon
+sound_off = pygame.image.load("sound_off.png") # Sound Muted icon
 
 sound_on = pygame.transform.scale(sound_on, (45,45))
 sound_off = pygame.transform.scale(sound_off, (45,45))
@@ -23,8 +23,6 @@ sound_off = pygame.transform.scale(sound_off, (45,45))
 sound_button = pygame.Rect((450, 10, 45, 45))
 is_muted = False
 
-#hit_sound = pygame.mixer.Sound("hit_sound.wav")
-#hit_sound.set_volume(0.5)
 
 def ball_movement():
     """
@@ -53,6 +51,7 @@ def ball_movement():
             ball_speed_y *= -1.05  # Reverse ball's vertical direction
             hit_sound.play()
             # TODO Task 6: Add sound effects HERE
+            # Added sound effect code at the top of the program
 
     # Ball collision with top boundary
     if ball.top <= 0:
@@ -144,7 +143,7 @@ while True:
                 player_speed += 6  # Stop moving left
             if event.key == pygame.K_RIGHT:
                 player_speed -= 6  # Stop moving right
-        if event.type == pygame.MOUSEBUTTONDOWN:  # Mute/Unmute click
+        if event.type == pygame.MOUSEBUTTONDOWN:  # Mute / Unmute click
              if sound_button.collidepoint(event.pos):
                 is_muted = not is_muted
                 if is_muted:
@@ -158,7 +157,7 @@ while True:
 
     # Visuals
     light_grey = pygame.Color('grey83')
-    chocolate1 = pygame.Color('chocolate1')
+    chocolate1 = pygame.Color('chocolate1') # Ball color
     screen.fill(bg_color)  # Clear screen with background color
     pygame.draw.rect(screen, light_grey, player)  # Draw player paddle
     # TODO Task 3: Change the Ball Color
