@@ -1,5 +1,12 @@
 import pygame, sys, random
 
+pygame.mixer.pre_init(44100, -16, 2, 512)
+
+pygame.init()
+
+hit_sound = pygame.mixer.Sound("hit_sound.wav")
+hit_sound.set_volume(0.5)
+
 def ball_movement():
     """
     Handles the movement of the ball and collision detection with the player and screen boundaries.
@@ -25,7 +32,13 @@ def ball_movement():
             #Task 2: Completed
             score += 1  # Increase player score
             ball_speed_y *= -1  # Reverse ball's vertical direction
+            hit_sound.play()
             # TODO Task 6: Add sound effects HERE
+
+#pygame.init()
+#pygame.mixer.init()
+#hit_sound = pygame.mixer.Sound("hit_sound.wav")
+
 
     # Ball collision with top boundary
     if ball.top <= 0:
@@ -97,7 +110,7 @@ start = False  # Indicates if the game has started
 while True:
     # Event handling
     # TODO Task 4: Add your name
-    name = "John Doe"
+    name = "Marcos Rivas"
     for event in pygame.event.get():
         if event.type == pygame.QUIT:  # Quit the game
             pygame.quit()
