@@ -10,6 +10,22 @@ hit_sound.set_volume(0.5)
 # Defines high Score
 high_score = 0
 
+pygame.mixer.music.load("pong_music.wav")
+pygame.mixer.music.set_volume(0.2)
+pygame.mixer.music.play(-1)
+
+sound_on = pygame.image.load("sound_on.png")
+sound_off = pygame.image.load("sound_off.png")
+
+sound_on = pygame.transform.scale(sound_on, (45,45))
+sound_off = pygame.transform.scale(sound_off, (45,45))
+
+sound_button = pygame.Rect((450, 10, 45, 45))
+is_muted = False
+
+#hit_sound = pygame.mixer.Sound("hit_sound.wav")
+#hit_sound.set_volume(0.5)
+
 def ball_movement():
     """
     Handles the movement of the ball and collision detection with the player and screen boundaries.
@@ -111,7 +127,7 @@ start = False  # Indicates if the game has started
 while True:
     # Event handling
     # TODO Task 4: Add your name
-    name = "Marcos Rivas"
+    name = "LeBron James"
     for event in pygame.event.get():
         if event.type == pygame.QUIT:  # Quit the game
             pygame.quit()
@@ -128,6 +144,13 @@ while True:
                 player_speed += 6  # Stop moving left
             if event.key == pygame.K_RIGHT:
                 player_speed -= 6  # Stop moving right
+        if event.type == pygame.MOUSEBUTTONDOWN:  # Mute/Unmute click
+             if sound_button.collidepoint(event.pos):
+                is_muted = not is_muted
+                if is_muted:
+                    pygame.mixer.music.pause()
+                else:
+                    pygame.mixer.music.unpause()
 
     # Game Logic
     ball_movement()
@@ -148,5 +171,9 @@ while True:
     screen.blit(player_best, (screen_width/2 - 115, 10))  # Display high score
 
     # Update display
+    if is_muted:
+        screen.blit(sound_off, (450, 10))
+    else:
+        screen.blit(sound_on, (450, 10))
     pygame.display.flip()
     clock.tick(60)  # Maintain 60 frames per second
