@@ -109,7 +109,7 @@ ball = pygame.Rect(screen_width / 2 - 15, screen_height / 2 - 15, 30, 30)  # Bal
 # Task 1 Complete
 player_height = 15
 player_width = 200
-player = pygame.Rect(screen_width/2 - 45, screen_height - 20, player_width, player_height)  # Player paddle
+player = pygame.Rect(screen_width/2 - player_width/2, screen_height - 20, player_width, player_height)  # Player paddle
 
 # Game Variables
 ball_speed_x = 0
@@ -126,7 +126,7 @@ start = False  # Indicates if the game has started
 while True:
     # Event handling
     # TODO Task 4: Add your name
-    name = "LeBron James"
+    name = "Marcos Rivas"
     for event in pygame.event.get():
         if event.type == pygame.QUIT:  # Quit the game
             pygame.quit()
@@ -171,8 +171,8 @@ while True:
 
     # Update display
     if is_muted:
-        screen.blit(sound_off, (450, 10))
+        screen.blit(sound_off, (screen_width - 50, 10)) # Always display muted icon top right corner
     else:
-        screen.blit(sound_on, (450, 10))
+        screen.blit(sound_on, (screen_width - 50, 10)) # Always display unmuted icon top right corner
     pygame.display.flip()
     clock.tick(60)  # Maintain 60 frames per second
