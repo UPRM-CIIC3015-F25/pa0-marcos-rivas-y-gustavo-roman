@@ -39,7 +39,7 @@ def ball_movement():
     speed = 10
     if start:
         ball_speed_x = speed * random.choice((1, -1))  # Randomize initial horizontal direction
-        ball_speed_y = speed * random.choice((1, -1))  # Randomize initial vertical direction
+        ball_speed_y = speed * -1  # Randomize initial vertical direction
         start = False
 
     # Ball collision with the player paddle
@@ -96,7 +96,7 @@ clock = pygame.time.Clock()
 
 # Main Window setup
 screen_width = 500  # Screen width (can be adjusted)
-screen_height = 500  # Screen height (can be adjusted)
+screen_height = 600  # Screen height (can be adjusted)
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Pong')  # Set window title
 
@@ -133,16 +133,16 @@ while True:
             sys.exit()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
-                player_speed -= 6  # Move paddle left
+                player_speed -= 7  # Move paddle left
             if event.key == pygame.K_RIGHT:
-                player_speed += 6  # Move paddle right
+                player_speed += 7  # Move paddle right
             if event.key == pygame.K_SPACE:
                 start = True  # Start the ball movement
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT:
-                player_speed += 6  # Stop moving left
+                player_speed += 7  # Stop moving left
             if event.key == pygame.K_RIGHT:
-                player_speed -= 6  # Stop moving right
+                player_speed -= 7  # Stop moving right
         if event.type == pygame.MOUSEBUTTONDOWN:  # Mute / Unmute click
              if sound_button.collidepoint(event.pos):
                 is_muted = not is_muted
