@@ -81,13 +81,14 @@ def restart():
     """
     Resets the ball and player scores to the initial state.
     """
-    global ball_speed_x, ball_speed_y, score, high_score
+    global ball_speed_x, ball_speed_y, score, high_score, can_start
     ball.center = (screen_width / 2, screen_height / 2)  # Reset ball position to center
     ball_speed_y, ball_speed_x = 0, 0  # Stop ball movement
     # Redefines high score
     if high_score < score:
         high_score = score
     score = 0  # Reset player score
+    can_start = True # Allows pressing the space bar to start again
 
 # General setup
 pygame.mixer.pre_init(44100, -16, 1, 1024)
@@ -121,6 +122,7 @@ score = 0
 basic_font = pygame.font.Font('freesansbold.ttf', 32)  # Font for displaying score
 
 start = False  # Indicates if the game has started
+can_start = True
 
 # Main game loop
 while True:
@@ -136,8 +138,9 @@ while True:
                 player_speed -= 7  # Move paddle left
             if event.key == pygame.K_RIGHT:
                 player_speed += 7  # Move paddle right
-            if event.key == pygame.K_SPACE:
+            if event.key == pygame.K_SPACE and can_start:
                 start = True  # Start the ball movement
+                can_start = False # Prevents pressing the space bar again until the ball resets
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT:
                 player_speed += 7  # Stop moving left
